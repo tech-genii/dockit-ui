@@ -1,0 +1,27 @@
+{
+  "name": "dockit",
+  "version": "1.0.0",
+  "description": "Application to simplyfy application design using docker",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tech-genii/dockit.git"
+  },
+  "keywords": [
+    "docker",
+    "container",
+    "docker-ui"
+  ],
+  "author": "saifullah",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tech-genii/dockit/issues"
+  },
+  "homepage": "https://github.com/tech-genii/dockit#readme",
+  "dependencies": {
+    "dockernode": "^0.1.0"
+  }
+}
