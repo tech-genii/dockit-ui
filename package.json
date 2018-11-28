@@ -4,7 +4,8 @@
   "description": "Application to simplyfy application design using docker",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "start": "nodejs index.js"
   },
   "repository": {
     "type": "git",
@@ -13,7 +14,8 @@
   "keywords": [
     "docker",
     "container",
-    "docker-ui"
+    "docker-ui",
+    "container-monitoring"
   ],
   "author": "saifullah",
   "license": "ISC",
@@ -22,6 +24,8 @@
   },
   "homepage": "https://github.com/tech-genii/dockit#readme",
   "dependencies": {
-    "dockernode": "^0.1.0"
+    "chalk": "^2.4.1",
+    "dockerode": "^2.5.7",
+    "tty-table": "^2.6.9"
   }
 }
