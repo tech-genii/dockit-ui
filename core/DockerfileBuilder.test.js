@@ -1,12 +1,13 @@
 
 let DockerfileBuilder = require('./DockerfileBuilder').DockerfileBuilder();
-let RunCommand = require('./RunCommand').runCommand;
 
-let dockerfileBuilder,runCommand;
+let dockerfileBuilder,runCommand,copyCommand,entrypointCommand;
 
 beforeEach(()=>{
     dockerfileBuilder = new DockerfileBuilder();
-    runCommand = new RunCommand([]);
+    runCommand = new DockerfileBuilder.RunCommand(["/bin/bash","echo","${SAIF}"]);
+    entrypointCommand = new DockerfileBuilder.EntryPointCommand(["/bin/bash"]);
+    copyCommand = new DockerfileBuilder.CopyCommand("./","/");
 });
 
 afterEach(() => {
@@ -21,8 +22,8 @@ test('Test builder method returns builder instance',()=>{
 
     expect(dockerfileBuilder.withBaseImage('ubuntu') instanceof DockerfileBuilder ).toBeTruthy();
     expect(dockerfileBuilder.andRun(runCommand) instanceof DockerfileBuilder ).toBeTruthy();
-    expect(dockerfileBuilder.andCopy() instanceof DockerfileBuilder ).toBeTruthy();
-    expect(dockerfileBuilder.withEntryPointBuilder() instanceof DockerfileBuilder ).toBeTruthy();
+    expect(dockerfileBuilder.andCopy(copyCommand) instanceof DockerfileBuilder ).toBeTruthy();
+    expect(dockerfileBuilder.withEntryPointBuilder(entrypointCommand) instanceof DockerfileBuilder ).toBeTruthy();
     expect(dockerfileBuilder.withEnvs() instanceof DockerfileBuilder ).toBeTruthy();
 
 });
@@ -33,26 +34,13 @@ test('Test DockerfileBuilder methods',()=>{
 });
 
 it("Create a Dockerfile",()=>{
-    expect(`
-# Use an official Python runtime as a parent image
-FROM python:2.7-slim
-
-# Set the working directory to /app
-WORKDIR /app
-
-# Copy the current directory contents into the container at /app
-COPY . /app
-
-# Install any needed packages specified in requirements.txt
-RUN pip install --trusted-host pypi.python.org -r requirements.txt
-
-# Make port 80 available to the world outside this container
-EXPOSE 80
-
-# Define environment variable
-ENV NAME World
-
-# Run app.py when the container launches
-CMD ["python", "app.py"]
-    `).toMatchSnapshot();
+    dockerfileBuilder.withBaseImage("ubuntu");
+    dockerfileBuilder.andCopy(copyCommand);
+    dockerfileBuilder.andCopy(copyCommand);
+    dockerfileBuilder.andCopy(copyCommand);
+    dockerfileBuilder.andRun(runCommand);
+    dockerfileBuilder.andRun(runCommand);
+    dockerfileBuilder.andRun(runCommand);
+    dockerfileBuilder.withEntryPointBuilder(entrypointCommand);
+    expect(dockerfileBuilder.toDockerfileString()).toMatchSnapshot();
 });
