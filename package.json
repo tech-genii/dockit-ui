@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "testWatch":"jest --watch",
-    "start": "nodejs index.js"
+    "start": "nodejs index.js",
+    "coverage": "jest --coverage"
   },
   "repository": {
     "type": "git",

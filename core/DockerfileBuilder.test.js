@@ -31,6 +31,19 @@ test('Test builder method returns builder instance',()=>{
 test('Test DockerfileBuilder methods',()=>{
     expect(()=>{dockerfileBuilder.withBaseImage();}).toThrow();
     expect(dockerfileBuilder.withBaseImage('ubuntu')).not.toBeNull();
+    expect(()=>{dockerfileBuilder.withBaseImage()}).toThrow();
+    expect(()=>{dockerfileBuilder.andRun()}).toThrow();
+    expect(()=>{dockerfileBuilder.andCopy()}).toThrow();
+    expect(()=>{dockerfileBuilder.withEntryPointBuilder()}).toThrow();
+});
+
+
+test('Test Dockerfile commands',()=>{
+    expect(()=>{new DockerfileBuilder.EntryPointCommand()}).toThrow();
+    expect(()=>{new DockerfileBuilder.CopyCommand(null,"./")}).toThrow();
+    expect(()=>{new DockerfileBuilder.CopyCommand("./",null)}).toThrow();
+    expect(()=>{new DockerfileBuilder.RunCommand()}).toThrow();
+    expect(()=>{new DockerfileBuilder.EntryPointCommand()}).toThrow();
 });
 
 it("Create a Dockerfile",()=>{
