@@ -1,13 +1,14 @@
-
-let DockerfileBuilder = require('./DockerfileBuilder').DockerfileBuilder();
+import {DockerfileBuilder} from './DockerfileBuilder'
+import {CopyCommand, EntryPointCommand, RunCommand} from "./DockerfileCommands";
 
 let dockerfileBuilder,runCommand,copyCommand,entrypointCommand;
 
 beforeEach(()=>{
     dockerfileBuilder = new DockerfileBuilder();
-    runCommand = new DockerfileBuilder.RunCommand(["/bin/bash","echo","${SAIF}"]);
-    entrypointCommand = new DockerfileBuilder.EntryPointCommand(["/bin/bash"]);
-    copyCommand = new DockerfileBuilder.CopyCommand("./","/");
+    runCommand = new RunCommand(["/bin/bash","echo","${SAIF}"]);
+    entrypointCommand = new EntryPointCommand(["/bin/bash"]);
+    copyCommand = new CopyCommand("./","/");
+
 });
 
 afterEach(() => {
@@ -19,12 +20,11 @@ test('Test DockerfileBuilder Init',()=>{
 });
 
 test('Test builder method returns builder instance',()=>{
-
     expect(dockerfileBuilder.withBaseImage('ubuntu') instanceof DockerfileBuilder ).toBeTruthy();
-    expect(dockerfileBuilder.andRun(runCommand) instanceof DockerfileBuilder ).toBeTruthy();
-    expect(dockerfileBuilder.andCopy(copyCommand) instanceof DockerfileBuilder ).toBeTruthy();
-    expect(dockerfileBuilder.withEntryPointBuilder(entrypointCommand) instanceof DockerfileBuilder ).toBeTruthy();
-    expect(dockerfileBuilder.withEnvs() instanceof DockerfileBuilder ).toBeTruthy();
+    expect(dockerfileBuilder.withRunCommand(runCommand) instanceof DockerfileBuilder ).toBeTruthy();
+    expect(dockerfileBuilder.withCopyCommand(copyCommand) instanceof DockerfileBuilder ).toBeTruthy();
+    expect(dockerfileBuilder.withEntryPointCommand(entrypointCommand) instanceof DockerfileBuilder ).toBeTruthy();
+    expect(dockerfileBuilder.withEnvVariables() instanceof DockerfileBuilder ).toBeTruthy();
 
 });
 
@@ -32,9 +32,9 @@ test('Test DockerfileBuilder methods',()=>{
     expect(()=>{dockerfileBuilder.withBaseImage();}).toThrow();
     expect(dockerfileBuilder.withBaseImage('ubuntu')).not.toBeNull();
     expect(()=>{dockerfileBuilder.withBaseImage()}).toThrow();
-    expect(()=>{dockerfileBuilder.andRun()}).toThrow();
-    expect(()=>{dockerfileBuilder.andCopy()}).toThrow();
-    expect(()=>{dockerfileBuilder.withEntryPointBuilder()}).toThrow();
+    expect(()=>{dockerfileBuilder.withRunCommand()}).toThrow();
+    expect(()=>{dockerfileBuilder.withCopyCommand()}).toThrow();
+    expect(()=>{dockerfileBuilder.withEntryPointCommand()}).toThrow();
 });
 
 
@@ -47,13 +47,14 @@ test('Test Dockerfile commands',()=>{
 });
 
 it("Create a Dockerfile",()=>{
+
     dockerfileBuilder.withBaseImage("ubuntu");
-    dockerfileBuilder.andCopy(copyCommand);
-    dockerfileBuilder.andCopy(copyCommand);
-    dockerfileBuilder.andCopy(copyCommand);
-    dockerfileBuilder.andRun(runCommand);
-    dockerfileBuilder.andRun(runCommand);
-    dockerfileBuilder.andRun(runCommand);
-    dockerfileBuilder.withEntryPointBuilder(entrypointCommand);
-    expect(dockerfileBuilder.toDockerfileString()).toMatchSnapshot();
+    dockerfileBuilder.withCopyCommand(copyCommand);
+    dockerfileBuilder.withCopyCommand(copyCommand);
+    dockerfileBuilder.withCopyCommand(copyCommand);
+    dockerfileBuilder.withRunCommand(runCommand);
+    dockerfileBuilder.withRunCommand(runCommand);
+    dockerfileBuilder.withRunCommand(runCommand);
+    dockerfileBuilder.withEntryPointCommand(entrypointCommand);
+    expect(dockerfileBuilder.buildDockerfileString()).toMatchSnapshot();
 });

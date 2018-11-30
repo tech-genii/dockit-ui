@@ -5,9 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "testWatch":"jest --watch",
+    "testWatch": "jest --watch",
     "start": "nodejs index.js",
     "coverage": "jest --coverage"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    }
   },
   "repository": {
     "type": "git",
@@ -31,6 +36,9 @@
     "tty-table": "^2.6.9"
   },
   "devDependencies": {
-    "jest": "^23.6.0"
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "jest": "^23.6.0",
+    "rimraf": "^2.6.2"
   }
 }
