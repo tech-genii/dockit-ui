@@ -10,5 +10,6 @@ COPY ./ /
 RUN /bin/bash echo \${SAIF}
 RUN /bin/bash echo \${SAIF}
 RUN /bin/bash echo \${SAIF}
-ENTRYPOINT /bin/bash"
+ENTRYPOINT /bin/bash
+ENV cms-api=localhost datamanagement-api=localhost fe-api=localhost"
 `;

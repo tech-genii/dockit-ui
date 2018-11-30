@@ -56,4 +56,26 @@ class EntryPointCommand extends Command{
     }
 }
 
-export {CopyCommand,RunCommand,EntryPointCommand}
+class EnvCommand extends Command{
+    constructor(command) {
+        super();
+        this.NAME = 0;
+        this.VALUE = 1;
+        if (!(command instanceof Array)) {
+            throw new Error("Expected instance of type Array but found : "+(typeof command));
+        }
+
+        this.command = command;
+    }
+
+    getCommand() {
+        if (this.command.length < 1) {
+            return "";
+        }
+        return "ENV " + this.command.map((envs) => {
+                return envs[this.NAME] + "="+ envs[this.VALUE]
+            }).reduce((previousValue, currentValue) => previousValue + " " + currentValue);
+    }
+}
+
+export {CopyCommand,RunCommand,EntryPointCommand,EnvCommand}

@@ -1,14 +1,14 @@
 import {DockerfileBuilder} from './DockerfileBuilder'
-import {CopyCommand, EntryPointCommand, RunCommand} from "./DockerfileCommands";
+import {CopyCommand, EntryPointCommand, RunCommand, EnvCommand} from "./DockerfileCommands";
 
-let dockerfileBuilder,runCommand,copyCommand,entrypointCommand;
+let dockerfileBuilder,runCommand,copyCommand,entrypointCommand,envCommand;
 
 beforeEach(()=>{
     dockerfileBuilder = new DockerfileBuilder();
     runCommand = new RunCommand(["/bin/bash","echo","${SAIF}"]);
     entrypointCommand = new EntryPointCommand(["/bin/bash"]);
     copyCommand = new CopyCommand("./","/");
-
+    envCommand = new EnvCommand([["cms-api","localhost"],["datamanagement-api","localhost"],["fe-api","localhost"]]);
 });
 
 afterEach(() => {
@@ -24,7 +24,7 @@ test('Test builder method returns builder instance',()=>{
     expect(dockerfileBuilder.withRunCommand(runCommand) instanceof DockerfileBuilder ).toBeTruthy();
     expect(dockerfileBuilder.withCopyCommand(copyCommand) instanceof DockerfileBuilder ).toBeTruthy();
     expect(dockerfileBuilder.withEntryPointCommand(entrypointCommand) instanceof DockerfileBuilder ).toBeTruthy();
-    expect(dockerfileBuilder.withEnvVariables() instanceof DockerfileBuilder ).toBeTruthy();
+    expect(dockerfileBuilder.withEnvVariables(envCommand) instanceof DockerfileBuilder ).toBeTruthy();
 
 });
 
@@ -56,5 +56,6 @@ it("Create a Dockerfile",()=>{
     dockerfileBuilder.withRunCommand(runCommand);
     dockerfileBuilder.withRunCommand(runCommand);
     dockerfileBuilder.withEntryPointCommand(entrypointCommand);
+    dockerfileBuilder.withEnvVariables(envCommand);
     expect(dockerfileBuilder.buildDockerfileString()).toMatchSnapshot();
 });

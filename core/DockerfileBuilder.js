@@ -1,4 +1,4 @@
-import {CopyCommand,RunCommand,EntryPointCommand} from "./DockerfileCommands"
+import {CopyCommand, RunCommand, EntryPointCommand, EnvCommand} from "./DockerfileCommands"
 
 class DockerfileBuilder{
     constructor() {
@@ -40,8 +40,11 @@ class DockerfileBuilder{
         this.entryPointCommand = entryPointCommand;
         return this;
     }
-    withEnvVariables(envs) {
-        this.envs = envs;
+    withEnvVariables(envCommand) {
+        if (!(envCommand instanceof EnvCommand)) {
+            throw new Error("parameter should be an instance of EnvCommand")
+        }
+        this.envs = envCommand;
         return this;
     }
 
@@ -55,6 +58,8 @@ class DockerfileBuilder{
         dockerfileString += this.runCommands.reduce((previousValue, currentValue) => previousValue+"\n"+currentValue.getCommand());
         dockerfileString += "\n";
         dockerfileString += this.entryPointCommand.getCommand();
+        dockerfileString += "\n";
+        dockerfileString += this.envs.getCommand();
 
 
         return dockerfileString;
