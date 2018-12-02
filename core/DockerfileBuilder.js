@@ -1,8 +1,10 @@
 import {CopyCommand, RunCommand, EntryPointCommand, EnvCommand} from "./DockerfileCommands"
 
+const EXPOSE_PORT_TYPES = ["tcp","udp"];
 class DockerfileBuilder{
     constructor() {
         this.commands = [];
+        this.exposePorts = [];
         this.runCommands = [];
         this.copyCommands = [];
         this.entryPointCommand = null;
@@ -43,6 +45,7 @@ class DockerfileBuilder{
         this.entryPointCommand = entryPointCommand;
         return this;
     }
+
     withEnvVariables(envCommand) {
         if (!(envCommand instanceof EnvCommand)) {
             throw new Error("parameter should be an instance of EnvCommand")
@@ -50,6 +53,70 @@ class DockerfileBuilder{
         this.envs = envCommand;
         return this;
     }
+
+    withLabel(label){
+        if(!(label instanceof String)){
+            throw new Error("parameter should be of type String");
+        }
+        this.label = label;
+    }
+
+    andExposePort(port,type){
+        if(!(port instanceof Number)){
+            throw new Error("port should be of type Integer");
+        }
+
+        if(!type){
+            this.exposePorts.push({port,type:"tcp"});
+        }else{
+            if(!(port instanceof String)){
+                throw new Error("port should be of type String");
+            }
+            if(EXPOSE_PORT_TYPES.indexOf(type) < 0 ){
+                throw new Error("port type should be one of  the following : "+EXPOSE_PORT_TYPES);
+            }
+            this.exposePorts.push({port,type});
+        }
+        
+    }
+
+    andAdd(srcFilePattern, dest, chownExp) {
+        return this;
+    }
+
+    withCMD(cmd) {
+        return this;
+    }
+
+    withVolume(mountpoint, volume) {
+        return this;
+    }
+
+    runAsUser(user, usergroup) {
+        return this;
+    }
+
+    useWorkingDirectory(workingDirectory) {
+        return this;
+    }
+
+    withBuildArg(buildArgs) {
+        return this;
+    }
+
+    withOnBuildInstruction(onBuildCommand) {
+        return this;
+    }
+
+    withHealthCheckBuilder(healthCheckBuilder) {
+        return this;
+    }
+
+    withShell(shell) {
+        return this;
+    }
+
+
 
     buildDockerfileString() {
         let dockerfileString = "";
