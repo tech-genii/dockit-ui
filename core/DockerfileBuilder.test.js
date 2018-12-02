@@ -20,12 +20,22 @@ test('Test DockerfileBuilder Init',()=>{
 });
 
 test('Test builder method returns builder instance',()=>{
-    expect(dockerfileBuilder.withBaseImage('ubuntu') instanceof DockerfileBuilder ).toBeTruthy();
-    expect(dockerfileBuilder.withRunCommand(runCommand) instanceof DockerfileBuilder ).toBeTruthy();
-    expect(dockerfileBuilder.withCopyCommand(copyCommand) instanceof DockerfileBuilder ).toBeTruthy();
-    expect(dockerfileBuilder.withEntryPointCommand(entrypointCommand) instanceof DockerfileBuilder ).toBeTruthy();
-    expect(dockerfileBuilder.withEnvVariables(envCommand) instanceof DockerfileBuilder ).toBeTruthy();
-
+    expect(dockerfileBuilder.withBaseImage('ubuntu')).toBeInstanceOf(DockerfileBuilder);
+    expect(dockerfileBuilder.withRunCommand(runCommand)).toBeInstanceOf(DockerfileBuilder);
+    expect(dockerfileBuilder.withCopyCommand(copyCommand)).toBeInstanceOf(DockerfileBuilder);
+    expect(dockerfileBuilder.withEntryPointCommand(entrypointCommand)).toBeInstanceOf(DockerfileBuilder);
+    expect(dockerfileBuilder.withEnvVariables(envCommand)).toBeInstanceOf(DockerfileBuilder);
+    expect(dockerfileBuilder.withBuildArg()).toBeInstanceOf(DockerfileBuilder);
+    expect(dockerfileBuilder.withCMD()).toBeInstanceOf(DockerfileBuilder);
+    expect(dockerfileBuilder.withLabel('label')).toBeInstanceOf(DockerfileBuilder);
+    expect(dockerfileBuilder.withOnBuildInstruction()).toBeInstanceOf(DockerfileBuilder);
+    expect(dockerfileBuilder.andAdd("","")).toBeInstanceOf(DockerfileBuilder);
+    expect(dockerfileBuilder.withCMD()).toBeInstanceOf(DockerfileBuilder);
+    expect(dockerfileBuilder.withVolume()).toBeInstanceOf(DockerfileBuilder);
+    expect(dockerfileBuilder.runAsUser()).toBeInstanceOf(DockerfileBuilder);
+    expect(dockerfileBuilder.useWorkingDirectory()).toBeInstanceOf(DockerfileBuilder);
+    expect(dockerfileBuilder.withHealthCheckBuilder()).toBeInstanceOf(DockerfileBuilder);
+    expect(dockerfileBuilder.withShell()).toBeInstanceOf(DockerfileBuilder);
 });
 
 test('Test DockerfileBuilder methods',()=>{

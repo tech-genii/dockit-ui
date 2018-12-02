@@ -1,7 +1,5 @@
 class Command {
-    getCommand() {
-
-    }
+    getCommand() {}
 }
 
 class RunCommand extends Command{
@@ -10,6 +8,9 @@ class RunCommand extends Command{
         super();
         if (!(command instanceof Array)) {
             throw new Error("Expected instance of type Array but found : "+(typeof command));
+        }
+        if (!command.length) {
+            throw new Error("Empty array")
         }
 
         this.command = command;

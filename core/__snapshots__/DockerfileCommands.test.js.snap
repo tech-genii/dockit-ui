@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test CopyCommand 1`] = `"COPY src dest"`;
+
+exports[`Test EntryPointCommand 1`] = `"ENTRYPOINT java -jar java.jar"`;
+
+exports[`Test EnvCommand 1`] = `"ENV env1=value2 env2=value2"`;
+
+exports[`Test RunCommand 1`] = `"RUN /bin/bash echo \${SAIF}"`;

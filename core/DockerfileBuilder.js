@@ -1,6 +1,7 @@
 import {CopyCommand, RunCommand, EntryPointCommand, EnvCommand} from "./DockerfileCommands"
 
 const EXPOSE_PORT_TYPES = ["tcp","udp"];
+
 class DockerfileBuilder{
     constructor() {
         this.commands = [];
@@ -55,10 +56,11 @@ class DockerfileBuilder{
     }
 
     withLabel(label){
-        if(!(label instanceof String)){
+        if(typeof label !== 'string'){
             throw new Error("parameter should be of type String");
         }
         this.label = label;
+        return this;
     }
 
     andExposePort(port,type){
@@ -77,6 +79,8 @@ class DockerfileBuilder{
             }
             this.exposePorts.push({port,type});
         }
+
+        return this;
         
     }
 
