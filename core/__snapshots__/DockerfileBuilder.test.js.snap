@@ -2,14 +2,13 @@
 
 exports[`Create a Dockerfile 1`] = `
 "FROM ubuntu
+ENV cms-api=localhost datamanagement-api=localhost fe-api=localhost
 
 COPY ./ /
 COPY ./ /
 COPY ./ /
-
 RUN /bin/bash echo \${SAIF}
 RUN /bin/bash echo \${SAIF}
 RUN /bin/bash echo \${SAIF}
-ENTRYPOINT /bin/bash
-ENV cms-api=localhost datamanagement-api=localhost fe-api=localhost"
+ENTRYPOINT /bin/bash"
 `;
