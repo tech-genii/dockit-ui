@@ -8,14 +8,18 @@ let container = docker.getContainer(containerId);
 
 container.inspect((err,Docker)=>{
 
-    if (err) {
-        console.error(err.json.message);
-    }else {
-        console.log(Docker.State);
-        if (Docker.State.Status !== "running") {
-            console.error("The container having id : ",containerId, "is not running");
-            console.error("Container status: "+Docker.State.Status,", exit code : ",Docker.State.ExitCode);
+    try {
+        if (err) {
+            console.error(err.message);
+        }else {
+            console.log(Docker.State);
+            if (Docker.State.Status !== "running") {
+                console.error("The container having id : ",containerId, "is not running");
+                console.error("Container status: "+Docker.State.Status,", exit code : ",Docker.State.ExitCode);
+            }
         }
+    } catch (error) {
+        console.log("Error",error);
     }
     //console.log(Docker.State.Status);
 });
