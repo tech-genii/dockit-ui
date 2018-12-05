@@ -47,15 +47,6 @@ test('Test DockerfileBuilder methods',()=>{
     expect(()=>{dockerfileBuilder.withEntryPointCommand()}).toThrow();
 });
 
-
-test('Test Dockerfile commands',()=>{
-    expect(()=>{new DockerfileBuilder.EntryPointCommand()}).toThrow();
-    expect(()=>{new DockerfileBuilder.CopyCommand(null,"./")}).toThrow();
-    expect(()=>{new DockerfileBuilder.CopyCommand("./",null)}).toThrow();
-    expect(()=>{new DockerfileBuilder.RunCommand()}).toThrow();
-    expect(()=>{new DockerfileBuilder.EntryPointCommand()}).toThrow();
-});
-
 it("Create a Dockerfile",()=>{
 
     dockerfileBuilder.withBaseImage("ubuntu");
@@ -67,5 +58,8 @@ it("Create a Dockerfile",()=>{
     dockerfileBuilder.withRunCommand(runCommand);
     dockerfileBuilder.withEntryPointCommand(entrypointCommand);
     dockerfileBuilder.withEnvVariables(envCommand);
+    expect(dockerfileBuilder.buildDockerfileString()).toMatchSnapshot();
+
+    //Checks that methods works the same way even after previous execution
     expect(dockerfileBuilder.buildDockerfileString()).toMatchSnapshot();
 });

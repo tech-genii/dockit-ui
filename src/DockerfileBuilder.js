@@ -5,6 +5,7 @@ const EXPOSE_PORT_TYPES = ["tcp","udp"];
 class DockerfileBuilder{
     constructor() {
         this.commands = [];
+        this.cmdCommand = null;
         this.exposePorts = [];
         this.runCommands = [];
         this.copyCommands = [];
@@ -34,7 +35,6 @@ class DockerfileBuilder{
             throw new Error("parameter should be an instance of CopyCommand");
         }
         this.commands.push(copyCommand);
-        // this.copyCommands.unshift(copyCommand);
         return this;
     }
 
@@ -88,7 +88,11 @@ class DockerfileBuilder{
         return this;
     }
 
-    withCMD(cmd) {
+    withCMD(cmdCommand) {
+        if (!(cmdCommand instanceof CMDCommand)) {
+            throw new Error("cmdCommand should be an instance of CMDCommand");
+        }
+        this.cmdCommand = cmdCommand;
         return this;
     }
 
@@ -127,13 +131,7 @@ class DockerfileBuilder{
         dockerfileString += "FROM "+this.baseImage+"\n";
         dockerfileString += this.envs.getCommand();
         dockerfileString += "\n";
-        this.commands.unshift("");
-        this.copyCommands.unshift("");
-        dockerfileString += this.commands.reduce((prevCommandString,nextCommand)=>{return prevCommandString+"\n"+nextCommand.getCommand()});
-        // dockerfileString += this.copyCommands.reduce((copyCommandString,currentCopyCommand)=>{return copyCommandString+"\n"+currentCopyCommand.getCommand()});
-        // this.runCommands.unshift("");
-        // dockerfileString += "\n";
-        // dockerfileString += this.runCommands.reduce((previousValue, currentValue) => previousValue+"\n"+currentValue.getCommand());
+        dockerfileString += [""].concat(this.commands).reduce((prevCommandString,nextCommand)=>{return prevCommandString+"\n"+nextCommand.getCommand()});
         dockerfileString += "\n";
         dockerfileString += this.entryPointCommand.getCommand();
 

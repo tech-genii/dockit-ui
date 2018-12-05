@@ -79,4 +79,8 @@ class EnvCommand extends Command{
     }
 }
 
+class CMDCommand extends Command{
+
+}
+
 export {CopyCommand,RunCommand,EntryPointCommand,EnvCommand}
