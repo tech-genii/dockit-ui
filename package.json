@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "description": "Application to simplyfy application design using docker",
   "main": "index.js",
+  "preferGlobal": true,
+  "bin": "./controllers/monitoring/containerMonitoring.js",
   "scripts": {
     "test": "jest",
     "testWatch": "jest --watch",
-    "start": "nodejs index.js",
+    "start": "node index.js",
     "coverage": "jest --coverage"
   },
   "jest": {
@@ -32,6 +34,7 @@
   "homepage": "https://github.com/tech-genii/dockit#readme",
   "dependencies": {
     "chalk": "^2.4.1",
+    "commander": "^2.19.0",
     "dockerode": "^2.5.7",
     "tty-table": "^2.6.9"
   },
