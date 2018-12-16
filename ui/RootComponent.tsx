@@ -15,6 +15,8 @@ const elasticsearchIcon = require('./icons/elasticsearch.png');
 const cassandraIcon = require('./icons/cassandra.png');
 const rabbitmqIcon = require('./icons/rabbitmq.png');
 const activemqIcon = require('./icons/activemq.png');
+const gradleIcon = require('./icons/gradle.png');
+const nginxIcon = require('./icons/nginx.png');
 
 const {
     Header, Content, Footer, Sider,
@@ -47,6 +49,8 @@ export default class RootComponent extends React.Component {
                             <DockerContainerAvatar containerIcon={cassandraIcon}/>
                             <DockerContainerAvatar containerIcon={rabbitmqIcon}/>
                             <DockerContainerAvatar containerIcon={activemqIcon}/>
+                            <DockerContainerAvatar containerIcon={gradleIcon}/>
+                            <DockerContainerAvatar containerIcon={nginxIcon}/>
                         </div>
                     </Content>
                     <Footer style={{textAlign: 'center'}}>
