@@ -42,10 +42,19 @@ export default class SideNavigation extends React.Component<any,any> {
         >
             <div className="logo"></div>
             <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-                <Menu.Item key="1">
-                    <Icon type="pie-chart"/>
-                    <span>Design Application</span>
-                </Menu.Item>
+                <SubMenu
+                    key="app-design"
+                    title={<span><Icon type="setting"/><span>App Design</span></span>}
+                >
+                    <Menu.Item key="ad-1">
+                        <Icon type="solution"/>
+                        <span>Create Microservice</span>
+                    </Menu.Item>
+                    <Menu.Item key="ad-2">
+                        <Icon type="project"/>
+                        <span>Full Application</span>
+                    </Menu.Item>
+                </SubMenu>
                 <Menu.Item key="2">
                     <Icon type="team"/>
                     <span>Projects</span>

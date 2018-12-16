@@ -6,6 +6,7 @@ import * as React from "react";
 import "antd/dist/antd.css"
 import SideNavigation from "./SideNavigation";
 import DockerContainerAvatar from "./DockerContainerAvatar";
+import CreateMicroserviceComponent from "./create_microservice/CreateMicroserviceComponent";
 
 const bootIcon = require('./icons/boot.png');
 const nodeIcon = require('./icons/node.png');
@@ -40,17 +41,18 @@ export default class RootComponent extends React.Component {
                             <Breadcrumb.Item>Bill</Breadcrumb.Item>
                         </Breadcrumb>
                         <div style={{padding: 24, background: '#fff', minHeight: 360}}>
+                            <CreateMicroserviceComponent/>
                             {/*<DockerContainerCard/>*/}
-                            <DockerContainerAvatar containerIcon={bootIcon}/>
-                            <DockerContainerAvatar containerIcon={nodeIcon}/>
-                            <DockerContainerAvatar containerIcon={mysqlIcon}/>
-                            <DockerContainerAvatar containerIcon={mongodbIcon}/>
-                            <DockerContainerAvatar containerIcon={elasticsearchIcon}/>
-                            <DockerContainerAvatar containerIcon={cassandraIcon}/>
-                            <DockerContainerAvatar containerIcon={rabbitmqIcon}/>
-                            <DockerContainerAvatar containerIcon={activemqIcon}/>
-                            <DockerContainerAvatar containerIcon={gradleIcon}/>
-                            <DockerContainerAvatar containerIcon={nginxIcon}/>
+                            {/*<DockerContainerAvatar containerIcon={bootIcon}/>*/}
+                            {/*<DockerContainerAvatar containerIcon={nodeIcon}/>*/}
+                            {/*<DockerContainerAvatar containerIcon={mysqlIcon}/>*/}
+                            {/*<DockerContainerAvatar containerIcon={mongodbIcon}/>*/}
+                            {/*<DockerContainerAvatar containerIcon={elasticsearchIcon}/>*/}
+                            {/*<DockerContainerAvatar containerIcon={cassandraIcon}/>*/}
+                            {/*<DockerContainerAvatar containerIcon={rabbitmqIcon}/>*/}
+                            {/*<DockerContainerAvatar containerIcon={activemqIcon}/>*/}
+                            {/*<DockerContainerAvatar containerIcon={gradleIcon}/>*/}
+                            {/*<DockerContainerAvatar containerIcon={nginxIcon}/>*/}
                         </div>
                     </Content>
                     <Footer style={{textAlign: 'center'}}>
