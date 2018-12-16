@@ -3,6 +3,8 @@ import {
 } from 'antd';
 import * as React from "react";
 
+import "antd/dist/antd.css"
+
 const {
     Header, Content, Footer, Sider,
 } = Layout;
@@ -32,6 +34,10 @@ export default class RootComponent extends React.Component {
                             <Icon type="pie-chart" />
                             <span>Design App</span>
                         </Menu.Item>
+                        <Menu.Item key="2">
+                            <Icon type="team" />
+                            <span>Projects</span>
+                        </Menu.Item>
                         <SubMenu
                             key="sub1"
                             title={<span><Icon type="user" /><span>Docker Image</span></span>}
@@ -41,14 +47,14 @@ export default class RootComponent extends React.Component {
                         </SubMenu>
                         <SubMenu
                             key="sub2"
-                            title={<span><Icon type="team" /><span>Team</span></span>}
+                            title={<span><Icon type="team" /><span>Monitor</span></span>}
                         >
-                            <Menu.Item key="6">Team 1</Menu.Item>
-                            <Menu.Item key="8">Team 2</Menu.Item>
+                            <Menu.Item key="6">App</Menu.Item>
+                            <Menu.Item key="8">Development</Menu.Item>
                         </SubMenu>
                         <Menu.Item key="9">
                             <Icon type="file" />
-                            <span>File</span>
+                            <span>Feature Grouping</span>
                         </Menu.Item>
                     </Menu>
                 </Sider>
@@ -60,11 +66,11 @@ export default class RootComponent extends React.Component {
                             <Breadcrumb.Item>Bill</Breadcrumb.Item>
                         </Breadcrumb>
                         <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
-                            Bill is a cat.
+                            Bill is a biiiiggg cat!!!!
                         </div>
                     </Content>
                     <Footer style={{ textAlign: 'center' }}>
-                        Ant Design ©2018 Created by Ant UED
+                        DockIt ©2018
                     </Footer>
                 </Layout>
             </Layout>
