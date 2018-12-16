@@ -1,75 +1,55 @@
 import {
-    Layout, Menu, Breadcrumb, Icon,
+    Layout, Menu, Breadcrumb, Icon, Avatar,
 } from 'antd';
 import * as React from "react";
 
 import "antd/dist/antd.css"
+import SideNavigation from "./SideNavigation";
+import DockerContainerAvatar from "./DockerContainerAvatar";
+
+const bootIcon = require('./icons/boot.png');
+const nodeIcon = require('./icons/node.png');
+const mysqlIcon = require('./icons/mysql.png');
+const mongodbIcon = require('./icons/mongodb.png');
+const elasticsearchIcon = require('./icons/elasticsearch.png');
+const cassandraIcon = require('./icons/cassandra.png');
+const rabbitmqIcon = require('./icons/rabbitmq.png');
+const activemqIcon = require('./icons/activemq.png');
 
 const {
     Header, Content, Footer, Sider,
 } = Layout;
 const SubMenu = Menu.SubMenu;
 
-export default class RootComponent extends React.Component {
-    state = {
-        collapsed: false,
-    };
 
-    onCollapse = (collapsed) => {
-        console.log(collapsed);
-        this.setState({ collapsed });
-    };
+
+export default class RootComponent extends React.Component {
 
     render() {
         return (
-            <Layout style={{ minHeight: '100vh' }}>
-                <Sider
-                    collapsible
-                    collapsed={this.state.collapsed}
-                    onCollapse={this.onCollapse}
-                >
-                    <div className="logo" />
-                    <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-                        <Menu.Item key="1">
-                            <Icon type="pie-chart" />
-                            <span>Design App</span>
-                        </Menu.Item>
-                        <Menu.Item key="2">
-                            <Icon type="team" />
-                            <span>Projects</span>
-                        </Menu.Item>
-                        <SubMenu
-                            key="sub1"
-                            title={<span><Icon type="user" /><span>Docker Image</span></span>}
-                        >
-                            <Menu.Item key="3">Dockerfile</Menu.Item>
-                            <Menu.Item key="4">Running Container</Menu.Item>
-                        </SubMenu>
-                        <SubMenu
-                            key="sub2"
-                            title={<span><Icon type="team" /><span>Monitor</span></span>}
-                        >
-                            <Menu.Item key="6">App</Menu.Item>
-                            <Menu.Item key="8">Development</Menu.Item>
-                        </SubMenu>
-                        <Menu.Item key="9">
-                            <Icon type="file" />
-                            <span>Feature Grouping</span>
-                        </Menu.Item>
-                    </Menu>
-                </Sider>
+            <Layout style={{minHeight: '100vh'}}>
+                <SideNavigation/>
                 <Layout>
-                    <Header style={{ background: '#fff', padding: 0 }} />
-                    <Content style={{ margin: '0 16px' }}>
-                        <Breadcrumb style={{ margin: '16px 0' }}>
+                    <Header style={{background: '#fff', padding: 0}}/>
+                    <Content style={{margin: '0 16px'}}>
+                        <Breadcrumb style={{margin: '16px 0'}}>
+
                             <Breadcrumb.Item>User</Breadcrumb.Item>
                             <Breadcrumb.Item>Bill</Breadcrumb.Item>
                         </Breadcrumb>
-                        <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
-                            Bill is a biiiiggg cat!!!!
+                        <div style={{padding: 24, background: '#fff', minHeight: 360}}>
+                            {/*<DockerContainerCard/>*/}
+                            <DockerContainerAvatar containerIcon={bootIcon}/>
+                            <DockerContainerAvatar containerIcon={nodeIcon}/>
+                            <DockerContainerAvatar containerIcon={mysqlIcon}/>
+                            <DockerContainerAvatar containerIcon={mongodbIcon}/>
+                            <DockerContainerAvatar containerIcon={elasticsearchIcon}/>
+                            <DockerContainerAvatar containerIcon={cassandraIcon}/>
+                            <DockerContainerAvatar containerIcon={rabbitmqIcon}/>
+                            <DockerContainerAvatar containerIcon={activemqIcon}/>
                         </div>
                     </Content>
-                    <Footer style={{ textAlign: 'center' }}>
+                    <Footer style={{textAlign: 'center'}}>
                         DockIt ©2018
                     </Footer>
                 </Layout>
