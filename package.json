@@ -47,6 +47,7 @@
     "dockerode": "^2.5.7",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
+    "storm-react-diagrams": "^5.2.1",
     "ts-loader": "^5.3.1",
     "tty-table": "^2.6.9",
     "webpack": "^4.27.0",

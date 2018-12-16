@@ -4,8 +4,12 @@ import {
 import * as React from "react";
 
 import "antd/dist/antd.css"
+import "storm-react-diagrams/dist/style.min.css";
+
 import SideNavigation from "./SideNavigation";
 import DockerContainerAvatar from "./DockerContainerAvatar";
+import * as SRD from "storm-react-diagrams";
+
 
 const bootIcon = require('./icons/boot.png');
 const nodeIcon = require('./icons/node.png');
@@ -28,6 +32,22 @@ const SubMenu = Menu.SubMenu;
 export default class RootComponent extends React.Component {
 
     render() {
+        let diagramEngine = new SRD.DiagramEngine();
+        diagramEngine.installDefaultFactories();
+
+        let diagramModel = new SRD.DiagramModel();
+
+        let defaultNodeModel = new SRD.DefaultNodeModel("Node 1");
+        let defaultPortModel = defaultNodeModel.addOutPort("Out");
+        defaultNodeModel.setPosition(100,100);
+
+        let defaultNodeModel2 = new SRD.DefaultNodeModel("Node 2");
+        let defaultPortModel2 = defaultNodeModel2.addInPort("In");
+        defaultNodeModel2.setPosition(400,400);
+
+        // let linkModel = defaultPortModel2.link(defaultPortModel);
+        // diagramModel.addAll(defaultNodeModel,defaultNodeModel2,linkModel);
+
         return (
             <Layout style={{minHeight: '100vh'}}>
                 <SideNavigation/>
