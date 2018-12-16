@@ -2,6 +2,7 @@ import * as React from "react";
 import {Tabs, Button, Avatar,Table, Divider, Tag} from 'antd';
 
 const TabPane = Tabs.TabPane;
+const ButtonGroup = Button.Group;
 
 const columns = [{
     title: 'Image Name',
@@ -30,9 +31,13 @@ const columns = [{
     key: 'action',
     render: (text, record) => (
         <span>
-      <a href="javascript:;">Edit</a>
-      <Divider type="vertical" />
-      <a href="javascript:;">Delete</a>
+      {/*<a href="javascript:;">Edit</a>*/}
+            <ButtonGroup>
+            <Button type="primary" icon="edit"/>
+            <Button type="danger" icon="delete"/>
+            </ButtonGroup>
+      {/*<Divider type="vertical" />*/}
+      {/*<a href="javascript:;">Delete</a>*/}
     </span>
     ),
 }];
@@ -68,17 +73,16 @@ const data = [
     }
 ];
 
-const operations = <Button>Extra Action</Button>;
+const operations = <Button type="primary" icon="plus" size={"default"}>CREATE</Button>;
 
 
 class CreateMicroserviceComponent extends React.Component<any,any> {
     render() {
         return (
             <Tabs tabBarExtraContent={operations}>
-                <TabPane tab="List" key="1">
+                <TabPane tab="Microservices" key="1">
                     <Table columns={columns} dataSource={data} />
                 </TabPane>
-                <TabPane tab="Create" key="2">Content of tab 2</TabPane>
             </Tabs>
         );
     }
