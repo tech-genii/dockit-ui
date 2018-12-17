@@ -2,6 +2,8 @@ import * as React from "react";
 import {Icon, Menu,Layout} from "antd";
 import SubMenu from "antd/es/menu/SubMenu";
 
+import { Link } from "react-router-dom";
+
 
 const { Sider } = Layout;
 
@@ -44,11 +46,11 @@ export default class SideNavigation extends React.Component<any,any> {
             <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
                 <SubMenu
                     key="app-design"
-                    title={<span><Icon type="setting"/><span>App Design</span></span>}
+                    title={<span><Icon type="setting"/><span><Link to='/' style={{ textDecoration: 'none',color:"inherit" }}>App Design </Link></span></span>}
                 >
                     <Menu.Item key="ad-1">
                         <Icon type="solution"/>
-                        <span>Create Microservice</span>
+                        <span><Link to='/microservice' style={{ textDecoration: 'none',color:"inherit" }}>Create Microservice</Link></span>
                     </Menu.Item>
                     <Menu.Item key="ad-2">
                         <Icon type="project"/>
