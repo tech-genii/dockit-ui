@@ -12,6 +12,7 @@ var config = {
     },
     entry: {
         "dockit-ui":"./ui/app.tsx"
+        // "dockit-core":"./src/dockit-core/index.js"
     },
     output: {
         path: path.resolve(__dirname, "ui/dist"),
@@ -29,6 +30,9 @@ var config = {
         }),
         new webpack.HotModuleReplacementPlugin()
     ],
+    externals:{
+        fs:    "commonjs fs"
+    },
 
     module: {
         rules:[

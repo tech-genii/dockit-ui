@@ -12,7 +12,8 @@
     "coverage": "jest --coverage",
     "develop": "webpack-dev-server --open",
     "dockerDevelop": "webpack-dev-server --host=0.0.0.0",
-    "uiBuild": "webpack"
+    "runDockit": "node src/dockit-core/index.js",
+    "build": "webpack"
   },
   "jest": {
     "transform": {
@@ -40,18 +41,20 @@
   },
   "homepage": "https://github.com/tech-genii/dockit#readme",
   "dependencies": {
-    "@types/react": "^16.7.13",
+    "@types/react": "^16.7.17",
     "@types/react-dom": "^16.0.11",
-    "antd": "^3.11.0",
+    "antd": "^3.11.2",
     "chalk": "^2.4.1",
     "commander": "^2.19.0",
     "dockerode": "^2.5.7",
+    "fs": "0.0.1-security",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "ts-loader": "^5.3.1",
     "tty-table": "^2.6.9",
-    "webpack": "^4.27.0",
-    "webpack-css-loaders": "^1.0.0"
+    "webpack": "^4.27.1",
+    "webpack-css-loaders": "^1.0.0",
+    "yaml": "^1.1.0"
   },
   "devDependencies": {
     "@types/jest": "^23.3.10",
