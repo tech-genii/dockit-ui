@@ -14,7 +14,7 @@ cli
     .alias("d")
     .description("This command starts the development environment")
     .action(dockitFile => {
-        let dockitFilePath = CWD;
+        let dockitFilePath:string = CWD;
         if (dockitFile) {
             if (dockitFile.toString().trim().startsWith("/")) {
                 dockitFilePath = dockitFile.toString().trim();
