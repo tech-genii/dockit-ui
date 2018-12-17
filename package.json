@@ -50,6 +50,7 @@
     "fs": "0.0.1-security",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
+    "shelljs": "^0.8.3",
     "ts-loader": "^5.3.1",
     "tty-table": "^2.6.9",
     "webpack": "^4.27.1",
@@ -57,9 +58,11 @@
     "yaml": "^1.1.0"
   },
   "devDependencies": {
+    "@types/chalk": "^2.2.0",
     "@types/jest": "^23.3.10",
     "@types/node": "^10.12.15",
     "@types/react-test-renderer": "^16.0.3",
+    "@types/shelljs": "^0.8.1",
     "@types/webpack": "^4.4.21",
     "@types/webpack-dev-server": "^3.1.1",
     "@types/yaml": "^1.0.1",

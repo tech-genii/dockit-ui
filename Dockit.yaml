@@ -1,0 +1,4 @@
+dockit:
+  devImage: ubuntu_npm_6_4_node_10
+  buildCommand: npm run dockerDevelop
+  projectDir: app
