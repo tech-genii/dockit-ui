@@ -11,6 +11,7 @@
     "start": "node index.js",
     "coverage": "jest --coverage",
     "develop": "webpack-dev-server --open",
+    "dockerDevelop": "webpack-dev-server --host=0.0.0.0",
     "uiBuild": "webpack"
   },
   "jest": {
