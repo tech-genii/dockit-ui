@@ -12,7 +12,7 @@ var config = {
     },
     entry: {
         "dockit-ui":"./ui/app.tsx"
-        // "dockit-core":"./src/dockit-core/index.js"
+        // "dockit-core":"./src/dockit-core/index.ts"
     },
     output: {
         path: path.resolve(__dirname, "ui/dist"),
