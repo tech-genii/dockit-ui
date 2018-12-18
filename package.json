@@ -59,6 +59,7 @@
   },
   "devDependencies": {
     "@types/chalk": "^2.2.0",
+    "@types/dockerode": "^2.5.10",
     "@types/jest": "^23.3.10",
     "@types/node": "^10.12.15",
     "@types/react-test-renderer": "^16.0.3",
