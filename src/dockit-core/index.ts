@@ -28,17 +28,26 @@ cli
             dockitFilePath = DEFAULT_PATH;
         }
         let dockitConf: any = fs.readFileSync(dockitFilePath, "utf-8");
-        // const catConfig = shell.cat(dockitFilePath).stdout;
         dockitConf = YAML.parse(dockitConf);
-        docker.createContainer({
-            Image: dockitConf.dockit.devImage,
-            Tty: true,
-            Entrypoint:"/bin/bash"
-        }, (error1, container) => {
-            container.attach({stream: true, stdout: true, stderr: true}, function (err, stream) {
-                stream.pipe(process.stdout);
-            });
-        });
+
+        console.log(dockitConf.dockit.portBinding);
+
+        const execResult = shell
+            .exec("docker run -t -d "
+                +"-p"+dockitConf.dockit.portBinding+" "
+                +"--mount type=bind,source="+CWD+",target=/"+dockitConf.dockit.workingDir+" "
+                + dockitConf.dockit.devImage + " "
+                + "top");
+
+        console.log("Spined up the development container");
+
+        if (!execResult.code) {
+            const containerID = execResult.stdout.trim();
+            const baseContainer = docker.getContainer(containerID);
+            shell
+                .exec("docker exec -d -w /"+dockitConf.dockit.workingDir+" "+containerID+" "+dockitConf.dockit.developCommand)
+            console.log("Started the development environment........");
+        }
     });
 
 cli.parse(process.argv);

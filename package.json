@@ -12,7 +12,7 @@
     "coverage": "jest --coverage",
     "develop": "webpack-dev-server --open",
     "dockerDevelop": "webpack-dev-server --host=0.0.0.0",
-    "runDockit": "ts-node src/dockit-core/index.ts",
+    "dockit": "ts-node src/dockit-core/index.ts",
     "build": "webpack"
   },
   "jest": {
