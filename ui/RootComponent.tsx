@@ -37,7 +37,7 @@ export default class RootComponent extends React.Component {
                         </Menu.Item>
                         <Menu.Item key="2">
                             <Icon type="team" />
-                            <span>Project</span>
+                            <span>Projects</span>
                         </Menu.Item>
                         <SubMenu
                             key="sub1"

@@ -30,23 +30,54 @@ cli
         let dockitConf: any = fs.readFileSync(dockitFilePath, "utf-8");
         dockitConf = YAML.parse(dockitConf);
 
-        console.log(dockitConf.dockit.portBinding);
+        console.log(dockitConf.dockit);
 
-        const execResult = shell
+
+
+        let containerID: string;
+
+        let execResult = shell
             .exec("docker run -t -d "
                 +"-p"+dockitConf.dockit.portBinding+" "
                 +"--mount type=bind,source="+CWD+",target=/"+dockitConf.dockit.workingDir+" "
                 + dockitConf.dockit.devImage + " "
                 + "top");
 
+        if (execResult.code) {
+            console.warn("DevImage not found preparing the Image");
+            execResult = shell
+                .exec("docker run -t -d "
+                    +"-p"+dockitConf.dockit.portBinding+" "
+                    +"--mount type=bind,source="+CWD+",target=/"+dockitConf.dockit.workingDir+" "
+                    + dockitConf.dockit.baseImage + " "
+                    + "top");
+
+            containerID = execResult.stdout.trim();
+            const baseContainer = docker.getContainer(containerID);
+            const runtimeSetup:[] = dockitConf.dockit.runtimeSetup;
+            console.log("Starting Runtime and Build Dependecny setup");
+            runtimeSetup.forEach(command => {
+                console.log("[RUNTIME SETUP] "+command);
+                shell.exec("docker exec "+" "+containerID+" "+command);
+            });
+            console.log("Completed Runtime and Build Dependency setup");
+
+            console.log("Creating DevImage");
+            shell.exec("docker commit "+containerID+" "+dockitConf.dockit.devImage);
+            console.log("Created DevImage");
+        }else {
+            containerID = execResult.stdout.trim();
+        }
+
         console.log("Spined up the development container");
 
         if (!execResult.code) {
-            const containerID = execResult.stdout.trim();
-            const baseContainer = docker.getContainer(containerID);
+            console.log("Starting Development Mode");
             shell
                 .exec("docker exec -d -w /"+dockitConf.dockit.workingDir+" "+containerID+" "+dockitConf.dockit.developCommand)
-            console.log("Started the development environment........");
+            console.log("Started Development Mode");
+        }else {
+
         }
     });
 
