@@ -13,7 +13,8 @@
     "develop": "webpack-dev-server --open",
     "dockerDevelop": "webpack-dev-server --host=0.0.0.0",
     "dockit": "ts-node src/dockit-core/index.ts",
-    "build": "webpack"
+    "build": "webpack",
+    "build:dockit_cli": "webpack --config dockit_cli.webpack.config.js"
   },
   "jest": {
     "transform": {
