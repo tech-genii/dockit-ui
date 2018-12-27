@@ -31,6 +31,7 @@ export default class RootComponent extends React.Component {
                     <div className="logo" />
                     <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
                         <Menu.Item key="1">
+
                             <Icon type="pie-chart" />
                             <span>Design App</span>
                         </Menu.Item>

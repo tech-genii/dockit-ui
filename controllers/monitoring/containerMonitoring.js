@@ -14,11 +14,11 @@ cli
     let header = [
         { value: 'CID', width: 30, headerAlign: 'left' },
         { value: 'IMAGE', width: 30, headerAlign: 'left' },
-        {value:'STATUS',width:30,headerAlign:'left'},
-        {value:'HEALTH',width:30,headerAlign:'left'},
-        {value:'START-TIME',width:60,headerAlign:'left'},
-        {value:'END-TIME',width:60,headerAlign:'left'},
-        {value:'STATE',width:30,headerAlign:'left'},
+        { value:'STATUS',width:30,headerAlign:'left'},
+        { value:'HEALTH',width:30,headerAlign:'left'},
+        { value:'START-TIME',width:60,headerAlign:'left'},
+        { value:'END-TIME',width:60,headerAlign:'left'},
+        { value:'STATE',width:30,headerAlign:'left'},
     ];
     
     const options = {
@@ -34,6 +34,6 @@ cli
     let t3 = Table(header,data, options);
 
     console.info(t3.render());
-})
+});
 
 cli.parse(process.argv);
