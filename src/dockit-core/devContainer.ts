@@ -122,42 +122,6 @@ function resize (container) {
 }
 
 
-
-// createBaseDevContainer({
-//     appDir:"app",
-//     baseImage:"ubuntu",
-//     devCommand: "npm run dockerDevelop",
-//     devImage:"ubuntu_dockit_development",
-//     portPublish:"",
-//     portBinding:{
-//         hostPort:"8080",
-//         containerPort:"8080"
-//     },
-//     runtimeSetup:[
-//         "apt update",
-//         "apt install gnupg2 -y",
-//         "apt install wget -y",
-//         "wget https://deb.nodesource.com/setup_10.x",
-//         "chmod 777 setup_10.x",
-//         "/bin/bash setup_10.x",
-//         "apt install -y nodejs"
-//     ]
-// });
-
-
-
-// fs.writeFile("/tmp/dockit.yaml","Saifu\n",err => {
-//     if (!err) {
-//         fs.readFile("/tmp/dockit.yaml",(err, data) => {
-//             if (err) {
-//                 console.error(err);
-//             }
-//             console.log(data.toString("utf-8"));
-//         });
-//     }
-// });
-
-
 export {
     createBaseDevContainer,
     checkIfDockerRunning
