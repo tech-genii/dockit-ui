@@ -67,7 +67,7 @@ export default class RootComponent extends React.Component {
                             <Breadcrumb.Item>Bill</Breadcrumb.Item>
                         </Breadcrumb>
                         <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
-                            Bill is a biiiiggg cat!!!!
+                            Bill is a big cat!!!!
                         </div>
                     </Content>
                     <Footer style={{ textAlign: 'center' }}>
