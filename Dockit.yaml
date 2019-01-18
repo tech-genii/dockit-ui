@@ -11,4 +11,6 @@ dockit:
   - apt install -y nodejs
   developCommand: npm run dockerDevelop
   workingDir: app
-  portBinding: 8080:8080
+  portBinding:
+    - hostPort: 8080
+      containerPort: 8080

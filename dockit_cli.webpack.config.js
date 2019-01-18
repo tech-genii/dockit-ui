@@ -2,17 +2,17 @@ var path = require("path");
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 var config = {
-    mode:'development',
+    mode:'production',
     target: "node",
     entry: {
-        "dockit-core":"./src/dockit-core/index.ts"
+        "dockit":"./src/dockit-core/index.ts"
     },
     output: {
         path: path.resolve(__dirname, "dist"),
-        filename: "[name].bundle.js"
+        filename: "[name].js"
     },
     resolve: {
-        extensions: [".ts", ".tsx", ".js"]
+        extensions: [".ts", ".js"]
     },
 
     plugins:[
@@ -25,7 +25,7 @@ var config = {
     module: {
         rules:[
             {
-                test: /\.tsx?$/,
+                test: /\.ts$/,
                 loader: "ts-loader",
                 exclude: /node_modules/
             }
