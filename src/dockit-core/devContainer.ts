@@ -3,6 +3,7 @@ import * as fs from 'fs';
 import {DockitConfig} from "./dockitConfig";
 import {runExec, runExecs} from "./execContainer";
 import {ContainerCreateOptions} from "dockerode";
+import {attachProxyTerminal} from "./proxyTerminal";
 
 
 
@@ -99,6 +100,41 @@ function createBaseDevContainer(dockitConfig:DockitConfig):number {
     return 0;
 }
 
+interface DevSetupConfig {
+    appDir: string | "app";
+    devImage: string;
+}
+
+function createDevSetupContainer(devSetupConfig: DevSetupConfig) {
+    if (!checkIfDockerRunning()) {
+        throw new Error("Check if docker is running!!!!");
+    }
+
+
+    const options : ContainerCreateOptions = {
+        Image: "ubuntu",
+        Cmd:["bash"],
+        Tty:true,
+        HostConfig:{
+            Mounts:[
+                {
+                    //Binds current directory with the container for development
+                    Type:"bind",Target:"/"+devSetupConfig.appDir,Source:process.cwd()
+                }
+            ]
+        },
+        WorkingDir: "/"+devSetupConfig.appDir
+        // AttachStdout:true,
+        // AttachStdin:true,
+        // AttachStderr:true,
+        // OpenStdin:true,
+        // StdinOnce:false
+    };
+
+    docker.createContainer(options,attachProxyTerminal);
+
+}
+
 // Exit container
 function exit (stream, isRaw) {
     process.stdout.removeListener('resize', resize);
@@ -124,5 +160,6 @@ function resize (container) {
 
 export {
     createBaseDevContainer,
-    checkIfDockerRunning
+    checkIfDockerRunning,
+    createDevSetupContainer
 };
