@@ -2,7 +2,7 @@ import * as YAML from 'yaml'
 import * as fs from 'fs'
 import * as cli from 'commander';
 import chalk from "chalk";
-import {createBaseDevContainer} from "./devContainer";
+import {createBaseDevContainer, createDevSetupContainer} from "./devContainer";
 const CWD = process.cwd();
 const DEFAULT_DOCKIT_CONF = '/Dockit.yaml';
 const DEFAULT_PATH = CWD+ DEFAULT_DOCKIT_CONF;
@@ -44,5 +44,15 @@ cli
         });
 
     });
+
+cli
+    .command("setup [image_name]")
+    .alias("s")
+    .description("This command starts a fresh container for setting up development environment")
+    .action(imageName => {
+        console.log("Starting Container for Dev Setup");
+        createDevSetupContainer({appDir:"app",devImage:"dockit_dev"});
+    });
+
 
 cli.parse(process.argv);
