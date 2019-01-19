@@ -57,6 +57,10 @@ function createBaseDevContainer(dockitConfig:DockitConfig):number {
     options.Image = dockitConfig.devImage;
 
     docker.createContainer(options,(error1, container) => {
+        const
+            uid = require('os').userInfo().uid,
+            gid = uid,
+            containerUserName = "appuser";
             if (error1) {
                 console.log("Could not start dev container building from runSetup in Dockit");
                 options.Image = dockitConfig.baseImage;
@@ -67,30 +71,39 @@ function createBaseDevContainer(dockitConfig:DockitConfig):number {
                             console.log(error1);
                         }
                         container.start().then(container => {
-                            runExecs(container,dockitConfig.runtimeSetup,()=>{
-                                console.log("Done setting up dev environment");
 
-                                container.commit({
-                                    repo:dockitConfig.devImage,
-                                    tag:"latest"
+                            runExecs(container,[
+                                "groupadd -g "+gid+" "+containerUserName,
+                                "useradd -r -u "+ uid+" -g "+containerUserName+" "+containerUserName
+                                ],
+                                "root",
+                                ()=>{
+                                runExecs(container,dockitConfig.runtimeSetup,"root",()=>{
+                                    console.log("Done setting up dev environment");
+                                    container.commit({
+                                        repo:dockitConfig.devImage,
+                                        tag:"latest"
+                                    },(error2, result) => {
+                                        console.log(error2);
+                                        runExec(container,dockitConfig.devCommand,containerUserName,()=>{
+                                            console.log("Dev command executed");
+                                        });
 
-                                },(error2, result) => {
-                                    console.log(error2);
-                                    runExec(container,dockitConfig.devCommand,()=>{
-                                        console.log("Dev command executed");
                                     });
 
                                 });
 
                             });
-
                         });
                     });
 
             }else {
                 container.start().then(container => {
-                    runExec(container,dockitConfig.devCommand,()=>{
+                    runExec(container,"mkdir test_dir",containerUserName,()=>{
                         console.log("Dev command executed");
+                        runExec(container,dockitConfig.devCommand,containerUserName,()=>{
+                            console.log("Dev command executed");
+                        });
                     });
                 });
             }
