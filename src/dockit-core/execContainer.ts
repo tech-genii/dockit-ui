@@ -1,5 +1,5 @@
 const {finished} = require('stream');
-export function runExecs(container,commandsQueue,callback) {
+export function runExecs(container,commandsQueue,user,callback) {
 
     const command = commandsQueue.shift();
     console.log("[Running Command] :: ",command);
@@ -7,7 +7,8 @@ export function runExecs(container,commandsQueue,callback) {
         Cmd: ['bash', '-c', command],
         Env: ['VAR=ttslkfjsdalkfj'],
         AttachStdout: true,
-        AttachStderr: true
+        AttachStderr: true,
+        User: user
     };
 
 
@@ -20,7 +21,7 @@ export function runExecs(container,commandsQueue,callback) {
 
             finished(stream,(err)=>{
                 if (commandsQueue.length) {
-                    runExecs(container,commandsQueue,callback);
+                    runExecs(container,commandsQueue,user,callback);
                 }else {
                     callback();
                 }
@@ -33,7 +34,7 @@ export function runExecs(container,commandsQueue,callback) {
     });
 }
 
-export function runExec(container,command,callback) {
+export function runExec(container,command,user,callback) {
 
     console.log("[Running Command] :: ",command);
     var options = {
@@ -41,6 +42,7 @@ export function runExec(container,command,callback) {
         Env: ['VAR=ttslkfjsdalkfj'],
         AttachStdout: true,
         AttachStderr: true,
+        User:user
     };
 
 
