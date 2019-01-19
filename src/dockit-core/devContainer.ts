@@ -123,12 +123,12 @@ function createDevSetupContainer(devSetupConfig: DevSetupConfig) {
                 }
             ]
         },
-        WorkingDir: "/"+devSetupConfig.appDir
-        // AttachStdout:true,
-        // AttachStdin:true,
-        // AttachStderr:true,
-        // OpenStdin:true,
-        // StdinOnce:false
+        WorkingDir: "/"+devSetupConfig.appDir,
+        AttachStdout:true,
+        AttachStdin:true,
+        AttachStderr:true,
+        OpenStdin:true,
+        StdinOnce:false
     };
 
     docker.createContainer(options,attachProxyTerminal);
