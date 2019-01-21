@@ -5,13 +5,15 @@ const webpack = require('webpack');
 
 var config = {
     mode:'development',
+    // target: "node",
     devtool:'inline-source-map',
     devServer:{
         contentBase:'./ui/dist',
         hot:true
     },
     entry: {
-        "dockit-ui":"./ui/app.tsx"
+        "dockit-ui":"./ui/app.tsx",
+        // "dockit-core":"./src/dockit-core/index.ts"
     },
     output: {
         path: path.resolve(__dirname, "ui/dist"),
@@ -29,6 +31,9 @@ var config = {
         }),
         new webpack.HotModuleReplacementPlugin()
     ],
+    externals:{
+        fs:    "commonjs fs"
+    },
 
     module: {
         rules:[

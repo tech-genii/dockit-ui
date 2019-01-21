@@ -1,0 +1,16 @@
+dockit:
+  baseImage: ubuntu
+  devImage: ubuntu_dockit_development
+  runtimeSetup:
+  - apt update
+  - apt install gnupg2 -y
+  - apt install wget -y
+  - wget https://deb.nodesource.com/setup_10.x
+  - chmod 777 setup_10.x
+  - /bin/bash setup_10.x
+  - apt install -y nodejs
+  developCommand: npm run dockerDevelop
+  workingDir: app
+  portBinding:
+    - hostPort: 8080
+      containerPort: 8080
