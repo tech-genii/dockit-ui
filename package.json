@@ -25,6 +25,44 @@
       "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
     }
   },
+  "debianPackageOptions": {
+    "maintainer": {
+      "name": "Saifullah Khan",
+      "email": "work.saifullah@gmail.com"
+    },
+    "prefix": "",
+    "name": "dockit",
+    "postfix": "",
+    "short_description": "Easing Development pains",
+    "long_description": "Easing Development pains",
+    "version": "1.0.0",
+    "build_number": "1",
+    "target_architecture": "amd64",
+    "category": "devel",
+    "links": [
+      {
+        "source": "/var/log/my-project",
+        "target": "/var/log/tomcat7"
+      },
+      {
+        "source": "/etc/init.d/my-project",
+        "target": "/etc/init.d/tomcat7"
+      }
+    ],
+    "directories": [
+      "/var/app/${name}"
+    ],
+    "dependencies": "couchdb, redis-server",
+    "files": [
+      {
+        "cwd": "./",
+        "src": [
+          "dockit"
+        ],
+        "dest": "/var/www/"
+      }
+    ]
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tech-genii/dockit.git"
@@ -71,6 +109,7 @@
     "babel-preset-es2015": "^6.24.1",
     "clean-webpack-plugin": "^1.0.0",
     "css-loader": "^1.0.1",
+    "debian-packager": "^1.5.3",
     "file-loader": "^2.0.0",
     "html-webpack-plugin": "^3.2.0",
     "jest": "^23.6.0",
