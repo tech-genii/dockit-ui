@@ -14,7 +14,7 @@
     "dockerDevelop": "webpack-dev-server --host=0.0.0.0",
     "dockit": "ts-node src/dockit-core/index.ts",
     "build:ui": "webpack",
-    "build:dockit": "webpack --config dockit_cli.webpack.config.js && pkg -t node10-linux dist/dockit.js && sudo cp dockit /usr/bin/"
+    "build:dockit": "webpack --config dockit_cli.webpack.config.js && pkg -t node10-linux dist/dockit.js && cp dockit ./dockit-cli/usr/bin/ && sudo dpkg-deb --build dockit-cli"
   },
   "jest": {
     "transform": {
