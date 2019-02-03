@@ -2,8 +2,17 @@ pipeline {
   agent any
   stages {
     stage('Build') {
-      steps {
-        echo 'Jenkins Dockit Build'
+      parallel {
+        stage('Build') {
+          steps {
+            echo 'Jenkins Dockit Build'
+          }
+        }
+        stage('Test') {
+          steps {
+            echo 'Test Started'
+          }
+        }
       }
     }
   }
