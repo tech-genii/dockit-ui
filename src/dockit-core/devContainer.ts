@@ -57,10 +57,11 @@ function createBaseDevContainer(dockitConfig:DockitConfig):number {
     options.Image = dockitConfig.devImage;
 
     docker.createContainer(options,(error1, container) => {
+        console.log(require('os').userInfo());
         const
             uid = require('os').userInfo().uid,
             gid = uid,
-            containerUserName = "appuser";
+            containerUserName = require('os').userInfo().username;
             if (error1) {
                 console.log("Could not start dev container building from runSetup in Dockit");
                 options.Image = dockitConfig.baseImage;
@@ -99,11 +100,8 @@ function createBaseDevContainer(dockitConfig:DockitConfig):number {
 
             }else {
                 container.start().then(container => {
-                    runExec(container,"mkdir test_dir",containerUserName,()=>{
+                    runExec(container,dockitConfig.devCommand,containerUserName,()=>{
                         console.log("Dev command executed");
-                        runExec(container,dockitConfig.devCommand,containerUserName,()=>{
-                            console.log("Dev command executed");
-                        });
                     });
                 });
             }
