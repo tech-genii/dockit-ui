@@ -1,10 +1,9 @@
 import * as React from "react";
 import {Icon, Menu,Layout} from "antd";
-import SubMenu from "antd/es/menu/SubMenu";
 
 import { Link } from "react-router-dom";
 
-
+const {SubMenu} = Menu;
 const { Sider } = Layout;
 
 export interface _Menu {
