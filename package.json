@@ -8,13 +8,10 @@
   "scripts": {
     "test": "jest",
     "testWatch": "jest --watch",
-    "start": "node index.js",
+    "start": "webpack-dev-server --open",
     "coverage": "jest --coverage",
-    "develop": "webpack-dev-server --open",
     "dockerDevelop": "webpack-dev-server --host=0.0.0.0",
-    "dockit": "ts-node src/dockit-core/index.ts",
-    "build:ui": "webpack",
-    "build:dockit": "webpack --config dockit_cli.webpack.config.js && pkg -t node10-linux dist/dockit.js && cp dockit ./dockit-cli/usr/bin/ && sudo dpkg-deb --build dockit-cli"
+    "build:ui": "webpack"
   },
   "jest": {
     "transform": {
