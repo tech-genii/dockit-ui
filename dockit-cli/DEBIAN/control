@@ -1,8 +1,0 @@
-Package: dockit
-Version: 1.0.0
-Architecture: amd64
-Section: base
-Priority: optional
-Depends: debconf (>= 0.2.26)
-Maintainer: saifullah
-Description: Dockit
