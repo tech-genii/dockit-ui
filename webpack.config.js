@@ -27,7 +27,7 @@ var config = {
     plugins:[
         new CleanWebpackPlugin(['ui/dist']),
         new HtmlWebpackPlugin({
-            title: 'DockIt Admin'
+            title: 'Dockit UI'
         }),
         new webpack.HotModuleReplacementPlugin()
     ],
